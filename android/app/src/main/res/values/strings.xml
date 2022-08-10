@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">firstApp</string>
-    <string name="default_notification_channel_id" translatable="false">biente_channel</string>
+    <string name="default_notification_channel_id" translatable="false">biente.webview.with.token</string>
 </resources>

@@ -68,14 +68,14 @@ export function showNotification(getTitle, getMessage) {
     });
 
     PushNotification.createChannel({
-        channelId: 'Biente',
+        channelId: 'biente.webview.with.token',
         channelName: 'Biente Channel',
         soundName: 'default',
         vibrate: true,
     });
 
     PushNotification.localNotification({
-        channelId: "Biente",
+        channelId: "biente.webview.with.token",
         title: getTitle,
         message: getMessage,
     });
