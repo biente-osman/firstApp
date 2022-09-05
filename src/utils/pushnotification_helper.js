@@ -37,12 +37,12 @@ export function showNotification(getTitle, getMessage) {
     PushNotification.configure({
         // (optional) Called when Token is generated (iOS and Android)
         onRegister: function (token) {
-            // console.log("TOKEN:", token);
+            console.log("TOKEN:", token);
         },
 
         // (required) Called when a remote or local notification is opened or received
         onNotification: function (notification) {
-            // console.log("NOTIFICATION:", notification);
+            console.log("NOTIFICATION:", notification);
         },
 
         // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
@@ -88,19 +88,23 @@ export const NotificationLister = () => {
     // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
     messaging()
-        .subscribeToTopic('all')
-        .then(() => console.log('Subscribed to all topic!'));
+        .subscribeToTopic('all');
+        // .then(() => console.log(''));
 
     messaging().onNotificationOpenedApp(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
+        console.log("onNotificationOpenedApp:", remoteMessage.data.title);
     });
 
     messaging().getInitialNotification(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
+        console.log("getInitialNotification:", remoteMessage.data.title);
     });
 
     messaging().onMessage(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
+        console.log("onMessage:", remoteMessage.data.title);
+
     });
 
 }

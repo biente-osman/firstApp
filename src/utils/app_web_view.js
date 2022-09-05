@@ -3,6 +3,7 @@ import { WebView } from "react-native-webview";
 import { StyleSheet, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 let getUserInformation;
 let getAppToken;
 let url = 'https://ecommerce.biente.shop/yarkin';
