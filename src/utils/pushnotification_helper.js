@@ -63,21 +63,25 @@ export function showNotification(getTitle, getMessage) {
          * (optional) default: true
          * - Specified if permissions (ios) and token (android and ios) will requested or not,
          * - if not, you must call PushNotificationsHandler.requestPermissions() later
+         * - if you are not using remote notification or do not have Firebase installed, use this:
+         *     requestPermissions: Platform.OS === 'ios'
          */
-        requestPermissions: Platform.OS === 'ios',
+        requestPermissions: true,
     });
 
     PushNotification.createChannel({
-        channelId: 'biente.webview.with.token',
-        channelName: 'Biente Channel',
-        soundName: 'default',
-        vibrate: true,
-    });
+        channelId: "specialid", // (required)
+        channelName: "Special messasge", // (required)
+        channelDescription: "Notification for special message", // (optional) default: undefined.
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.  
+    },(created) => console.log(`createChannel returned '${created}'`));
 
     PushNotification.localNotification({
         channelId: "biente.webview.with.token",
         title: getTitle,
         message: getMessage,
+        soundName: 'default',
     });
 };
 
@@ -104,7 +108,6 @@ export const NotificationLister = () => {
     messaging().onMessage(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
         console.log("onMessage:", remoteMessage.data.title);
-
     });
 
 }
