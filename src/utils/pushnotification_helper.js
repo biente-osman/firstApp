@@ -31,7 +31,6 @@ async function GetFCMToke() {
     }
 }
 
-// const showNotification = () => {
 export function showNotification(getTitle, getMessage) {
 
     PushNotification.configure({
@@ -69,24 +68,30 @@ export function showNotification(getTitle, getMessage) {
         requestPermissions: true,
     });
 
-    // PushNotification.createChannel({
-    //     channelId: "biente.webview.with.token", // (required)
-    //     channelName: "Special messasge", // (required)
-    //     channelDescription: "Notification for special message", // (optional) default: undefined.
-    //     importance: 4, // (optional) default: 4. Int value of the Android notification importance
-    //     vibrate: true, // (optional) default: true. Creates the default vibration patten if true.  
-    // },(created) => console.log(`createChannel returned '${created}'`)
-    // );
+
+    PushNotification.createChannel({
+        channelId: "firstAppChannel1", // (required)
+        channelName: "Biente Shop", // (required)
+        soundName: "default",
+        playSound: true,
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+    },
+    (created) => console.log(`createChannel returned '${created}'`)
+    );
 
     PushNotification.getChannels(function (channel_ids) {
-        console.log(channel_ids); // ['channel_id_1']
+        console.log(channel_ids);
       });
 
     PushNotification.localNotification({
-        channelId: "biente.webview.with.token",
+        channelId: "firstAppChannel1",
         title: getTitle,
-        message: getMessage,
+        message: getMessage,        
         soundName: 'default',
+        largeIconUrl: "https://www.barbieldesignbyecem.com/image/catalog/logo/barbiel.png", // bildirim sağ tarafındaki küçük resim
+        bigPictureUrl: "https://www.barbieldesignbyecem.com/image/catalog/logo/barbiel.png", // bildirim açılınca büyük resim
+        number: 10
     });
 };
 
@@ -96,23 +101,22 @@ export function showNotification(getTitle, getMessage) {
 export const NotificationLister = () => {
     // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
-    messaging()
-        .subscribeToTopic('all');
+    messaging().subscribeToTopic('all');
         // .then(() => console.log(''));
 
     messaging().onNotificationOpenedApp(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
-        console.log("onNotificationOpenedApp:", remoteMessage.data.title);
+        // console.log("onNotificationOpenedApp:", remoteMessage.data.title);
     });
 
     messaging().getInitialNotification(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
-        console.log("getInitialNotification:", remoteMessage.data.title);
+        // console.log("getInitialNotification:", remoteMessage.data.title);
     });
 
     messaging().onMessage(async remoteMessage => {
         showNotification(remoteMessage.data.title, remoteMessage.data.body);
-        console.log("onMessage:", remoteMessage.data.title);
+        // console.log("onMessage:", remoteMessage.data.title);
     });
 
 }
