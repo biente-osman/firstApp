@@ -1,5 +1,7 @@
 package com.firstapp;
 
+// import com.facebook.react.shell.MainReactPackage;
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import android.app.Application;
 import android.content.Context;
@@ -14,7 +16,6 @@ import com.firstapp.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -26,10 +27,17 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
+          // return Arrays.asList(
+          //   new MainReactPackage(),
+          //   new ReactNativeFirebaseAppPackage(),
+          // );
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
+          // packages.add(new MyReactNativePackage());          
+          // packages.add(new MainReactPackage());
+          // packages.add(new RNFSPackage());
+          // packages.add(new ReactNativeFirebaseAppPackage());
           // packages.add(new ReactNativePushNotificationPackage());
 
           return packages;

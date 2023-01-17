@@ -69,13 +69,18 @@ export function showNotification(getTitle, getMessage) {
         requestPermissions: true,
     });
 
-    PushNotification.createChannel({
-        channelId: "specialid", // (required)
-        channelName: "Special messasge", // (required)
-        channelDescription: "Notification for special message", // (optional) default: undefined.
-        importance: 4, // (optional) default: 4. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.  
-    },(created) => console.log(`createChannel returned '${created}'`));
+    // PushNotification.createChannel({
+    //     channelId: "biente.webview.with.token", // (required)
+    //     channelName: "Special messasge", // (required)
+    //     channelDescription: "Notification for special message", // (optional) default: undefined.
+    //     importance: 4, // (optional) default: 4. Int value of the Android notification importance
+    //     vibrate: true, // (optional) default: true. Creates the default vibration patten if true.  
+    // },(created) => console.log(`createChannel returned '${created}'`)
+    // );
+
+    PushNotification.getChannels(function (channel_ids) {
+        console.log(channel_ids); // ['channel_id_1']
+      });
 
     PushNotification.localNotification({
         channelId: "biente.webview.with.token",
